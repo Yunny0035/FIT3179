@@ -1,0 +1,79 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 800,
+    "params": [
+      {
+        "name": "country_param",
+        "bind": {
+          "input": "select",
+          "options": [
+            "All",
+            "Argentina",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Chile",
+            "Colombia",
+            "Denmark",
+            "Ecuador",
+            "France",
+            "Germany",
+            "Italy",
+            "Japan",
+            "Mexico",
+            "Panama",
+            "Peru",
+            "Singapore",
+            "Slovenia",
+            "South Africa",
+            "South Korea",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Thailand",
+            "Turkey",
+            "Turkey",
+            "United Arab Emirates",
+            "United Kingdom",
+            "United States"
+          ],
+          "name": "Country Filter"
+        },
+        "value": "All"
+      }
+    ],
+    "data": {
+      "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/Week_9/data/Global%20Electricity%20Statistics.csv"
+    },
+    "encoding": {
+      "y": {
+        "field": "Country",
+        "type": "nominal",
+        "sort": {"field": "Rank", "order": "ascending"}
+      },
+      "tooltip": [
+        {"field": "Country", "type": "nominal", "title": "Country"},
+        {"field": "1980", "type": "quantitative", "title": "1980"}
+      ]
+    },
+    "layer": [
+      {
+        "mark": "bar",
+        "encoding": {
+          "x": {
+            "field": "1980",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+        "encoding": {
+          "text": {"field": "1980", "type": "quantitative"},
+          "x": {"field": "1980", "type": "quantitative"},
+          "y": {"field": "Country", "type": "nominal"}
+        }
+      }
+    ]
+  }
