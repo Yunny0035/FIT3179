@@ -1,79 +1,52 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 800,
-    "params": [
-      {
-        "name": "country_param",
-        "bind": {
-          "input": "select",
-          "options": [
-            "All",
-            "Argentina",
-            "Austria",
-            "Belgium",
-            "Brazil",
-            "Chile",
-            "Colombia",
-            "Denmark",
-            "Ecuador",
-            "France",
-            "Germany",
-            "Italy",
-            "Japan",
-            "Mexico",
-            "Panama",
-            "Peru",
-            "Singapore",
-            "Slovenia",
-            "South Africa",
-            "South Korea",
-            "Spain",
-            "Sweden",
-            "Switzerland",
-            "Thailand",
-            "Turkey",
-            "Turkey",
-            "United Arab Emirates",
-            "United Kingdom",
-            "United States"
-          ],
-          "name": "Country Filter"
-        },
-        "value": "All"
-      }
-    ],
-    "data": {
-      "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/Week_9/data/Global%20Electricity%20Statistics.csv"
-    },
-    "encoding": {
-      "y": {
-        "field": "Country",
-        "type": "nominal",
-        "sort": {"field": "Rank", "order": "ascending"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 800,
+  "params": [
+    {
+      "name": "region_param",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "North-America",            
+          "Africa",
+          "Europe",
+          "Asia & Oceania",
+          "Middle East",
+          "Eurasia",
+          "Central & South America"
+        ],
+        "name": "Region Filter"
       },
-      "tooltip": [
-        {"field": "Country", "type": "nominal", "title": "Country"},
-        {"field": "1980", "type": "quantitative", "title": "1980"}
-      ]
+      "value": "All"
+    }
+  ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics1.csv"
+  },
+  "transform": [
+    {"filter": "datum.Region === region_param || region_param === 'All'"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "Region",
+      "type": "nominal"
     },
-    "layer": [
-      {
-        "mark": "bar",
-        "encoding": {
-          "x": {
-            "field": "1980",
-            "type": "quantitative"
-          }
-        }
-      },
-      {
-        "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
-        "encoding": {
-          "text": {"field": "1980", "type": "quantitative"},
-          "x": {"field": "1980", "type": "quantitative"},
-          "y": {"field": "Country", "type": "nominal"}
-        }
-      }
+    "tooltip": [
+      {"field": "Region", "type": "nominal", "title": "Region"},
+      {"field": "X1980", "type": "quantitative", "title": "X1980"}
     ]
-  }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "X1980",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}
