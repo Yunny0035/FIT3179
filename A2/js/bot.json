@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 350,
+  "height": 350,
+  "title": {"text": "Electricity consumption by continent(individual countries)"},
+  "description": "This graph shows the electricity consumption of the countries included in the statistics for the year 2000 in the six continents, we can derive that",
+  "data": {"url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"},
+  "transform": [
+    {"filter": "datum.Features === 'net consumption'"}
+  ],
+  "selection": {
+    "Continent_highlight": {
+      "type": "multi",
+      "fields": ["Region"],
+      "bind": "legend"
+    }
+  },
+  "mark":{
+    "type": "circle",
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "2000",
+      "type": "quantitative",
+      "scale": {"zero": false, "domain": [0, 4000]}
+    },
+    "y": {
+      "field": "Region",
+      "type": "nominal"
+    },
+    "color": {
+      "field": "Region", 
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "North America", 
+          "Africa",
+          "Europe",
+          "Asia & Oceania",
+          "Middle East",
+          "Central & South America"
+        ],
+        "range": [
+          "#e41a1c",
+          "#984ea3",
+          "#ff7f00",
+          "#a6cee3",
+          "#377eb8",
+          "#a65628"
+        ]
+      }
+    },
+    "opacity": {
+      "condition": {"selection": "Continent_highlight", "value": 1},
+      "value": 0.1}
+  },
+  "config": {
+  "axisY": {
+    "labelFontSize": 14
+  }
+}
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Sum of net generation by region",
-  "width": 350,
+  "width": "container",
   "height": 200,
   "params": [
     {
