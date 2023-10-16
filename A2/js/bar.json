@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Sum of net generation by region",
   "width": 800,
   "height": 800,
   "params": [
@@ -9,12 +10,11 @@
         "input": "select",
         "options": [
           "All",
-          "North-America",            
+          "North America",            
           "Africa",
           "Europe",
           "Asia & Oceania",
           "Middle East",
-          "Eurasia",
           "Central & South America"
         ],
         "name": "Region Filter"
@@ -23,7 +23,7 @@
     }
   ],
   "data": {
-    "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics1.csv"
+    "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
   },
   "transform": [
     {"filter": "datum.Region === region_param || region_param === 'All'"}
@@ -31,19 +31,33 @@
   "encoding": {
     "y": {
       "field": "Region",
-      "type": "nominal"
+      "type": "nominal",
+      "sort": "-x"
     },
-    "tooltip": [
-      {"field": "Region", "type": "nominal", "title": "Region"},
-      {"field": "X1980", "type": "quantitative", "title": "X1980"}
-    ]
+    "x": {
+      "aggregate": "sum",
+      "field": "1980",
+      "title": "Sum of net generation"
+    }
   },
   "layer": [
     {
-      "mark": "bar",
+      "mark": "bar"
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5
+      },
       "encoding": {
         "x": {
-          "field": "X1980",
+          "field": "1980",
+          "type": "quantitative"
+        },
+        "text": {
+          "aggregate": "sum",
+          "field": "1980",
           "type": "quantitative"
         }
       }
