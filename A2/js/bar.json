@@ -26,6 +26,7 @@
     "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
   },
   "transform": [
+    {"filter": "datum.Features === 'net generation'"},
     {"filter": "datum.Region === region_param || region_param === 'All'"}
   ],
   "encoding": {
