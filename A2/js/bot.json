@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 350,
+  "width": "container",
   "height": 350,
   "title": {"text": "Electricity consumption by continent(individual countries)"},
   "description": "This graph shows the electricity consumption of the countries included in the statistics for the year 2000 in the six continents, we can derive that",

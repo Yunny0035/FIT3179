@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 450,
+  "width": "container",
+  "height": 350,
   "params": [
     {
       "name": "zoom_level",
@@ -55,23 +55,23 @@
           "lookup": "properties.NAME",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics1.csv"
+              "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
             },
             "key": "Country",
-            "fields": ["X1980"]
+            "fields": ["1980"]
           }          
         }
       ],
       "mark": {"type": "geoshape"},
       "encoding": {
         "color": {
-          "field": "X1980",
+          "field": "1980",
           "type": "quantitative",
           "scale": {"type": "log", "scheme": "yellowgreen"}
         },
         "tooltip": [
           {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "X1980", "type": "quantitative"}
+          {"field": "1980", "type": "quantitative"}
         ]
       }
     }

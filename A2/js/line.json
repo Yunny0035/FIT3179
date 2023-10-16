@@ -1,6 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
+    "width": "container",
+    "height": 350,
     "title": "Fluctuation of net electricity consumption's change(1980-2021)",
     "data": {
     "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv",
