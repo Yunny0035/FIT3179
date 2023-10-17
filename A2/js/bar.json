@@ -3,31 +3,11 @@
   "title": "Sum of net generation by region",
   "width": "container",
   "height": 350,
-  "params": [
-    {
-      "name": "region_param",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All",
-          "North America",            
-          "Africa",
-          "Europe",
-          "Asia & Oceania",
-          "Middle East",
-          "Central & South America"
-        ],
-        "name": "Region Filter"
-      },
-      "value": "All"
-    }
-  ],
   "data": {
     "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
   },
   "transform": [
-    {"filter": "datum.Features === 'net generation'"},
-    {"filter": "datum.Region === region_param || region_param === 'All'"}
+    {"filter": "datum.Features === 'net generation'"}
   ],
   "encoding": {
     "y": {
