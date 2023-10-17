@@ -13,27 +13,53 @@
         "step": 20,
         "name": "Zoom: "
       }
+    },
+    {
+      "name": "center_to",
+      "value": [0, 0],
+      "bind": {
+        "input": "select",
+        "options": [
+          [0, 0],
+          [-100, 50],
+          [20, 10],
+          [15, 50],
+          [100,5],
+          [55, 25],
+          [-60, -20]
+        ],
+        "labels": [
+          "All",
+          "North America",            
+          "Africa",
+          "Europe",
+          "Asia & Oceania",
+          "Middle East",
+          "Central & South America"
+         
+        ],
+        "name": "Region Center:"
+      }
     }
   ],
   "title": {"text": "Global Electricity Statistics"},
   "projection": {
     "type": "equirectangular",
-    "scale": {"expr": "zoom_level"}
+    "scale": {"expr": "zoom_level"},
+    "center": {"expr": "center_to"}
   }, 
-  "data": {
-    "url": "https://yunny0035.github.io/FIT3179/A2/js/ne_110m_admin_0_countries.topojson",
-    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-  },
   "layer": [
     {
-      "transform": [
-        {
-          "calculate": "'Data is not available in ' + datum.properties.NAME",
-          "as": "note"
-        }
-      ],
+      "data": {
+        "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
       "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
-      "encoding": {"tooltip": {"field": "note"}}
+      "encoding": {
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"}
+        ]
+      }
     },
     {
       "data": {
@@ -50,30 +76,40 @@
       "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
     },
     {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
+      },
       "transform": [
         {
-          "lookup": "properties.NAME",
+          "lookup": "Country",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/Yunny0035/FIT3179/main/A2/data/Global%20Electricity%20Statistics.csv"
+              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
             },
-            "key": "Country",
-            "fields": ["1980"]
-          }          
+            "key": "properties.NAME"
+          },
+          "as": "geo"
         }
       ],
       "mark": {"type": "geoshape"},
       "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
         "color": {
           "field": "1980",
           "type": "quantitative",
-          "scale": {"type": "log", "scheme": "yellowgreen"}
+          "scale": {"type": "log", "scheme": "goldgreen"},
+          "legend": {"title": "Net generation"}
         },
         "tooltip": [
-          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "1980", "type": "quantitative"}
+          {"field": "Country", "type": "nominal", "title": "Country"},
+          {"field": "1980", "type": "quantitative", "title": "Net generation"}
         ]
       }
     }
-  ]
+  ],
+  "config": {}
 }
